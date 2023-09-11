@@ -14,7 +14,9 @@
     try {
       pages += 1;
       const response = await fetch(
-        `https://www.rijksmuseum.nl/api/nl/collection?key=${process.env.API_KEY}&p=${pages}`
+        `https://www.rijksmuseum.nl/api/nl/collection?key=${
+          import.meta.env.VITE_API_KEY
+        }&p=${pages}`
       );
       data = await response.json();
       console.log(data);
