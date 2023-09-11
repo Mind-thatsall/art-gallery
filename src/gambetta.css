@@ -1,0 +1,182 @@
+/**
+ * @license
+ *
+ * Font Family: Gambetta
+ * Designed by: Paul Troppmar
+ * URL: https://www.public/fontshare.com/public/fonts/gambetta
+ * © 2023 Indian Type Foundry
+ *
+ * Font Styles:
+ * Gambetta Variable(Variable font)
+ * Gambetta Variable Italic(Variable font)
+ * Gambetta Light
+ * Gambetta Light Italic
+ * Gambetta Regular
+ * Gambetta Italic
+ * Gambetta Medium
+ * Gambetta Medium Italic
+ * Gambetta Semibold
+ * Gambetta Semibold Italic
+ * Gambetta Bold
+ * Gambetta Bold Italic
+ *
+*/
+
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 300.0 'wght' 700.0;
+*
+* available axes:
+
+* 'wght' (range from 300.0 to 700.0)
+
+* 'wght' (range from 300.0 to 700.0)
+
+*/
+
+@font-face {
+  font-family: 'Gambetta-Variable';
+  src: url('../public/fonts/Gambetta-Variable.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Variable.woff') format('woff'),
+       url('../public/fonts/Gambetta-Variable.ttf') format('truetype');
+       font-weight: 300 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+/**
+* This is a variable font
+* You can controll variable axes as shown below:
+* font-variation-settings: 'wght' 300.0 'wght' 700.0;
+*
+* available axes:
+
+* 'wght' (range from 300.0 to 700.0)
+
+* 'wght' (range from 300.0 to 700.0)
+
+*/
+
+@font-face {
+  font-family: 'Gambetta-VariableItalic';
+  src: url('../public/fonts/Gambetta-VariableItalic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-VariableItalic.woff') format('woff'),
+       url('../public/fonts/Gambetta-VariableItalic.ttf') format('truetype');
+       font-weight: 300 700;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Light';
+  src: url('../public/fonts/Gambetta-Light.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Light.woff') format('woff'),
+       url('../public/fonts/Gambetta-Light.ttf') format('truetype');
+       font-weight: 300;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-LightItalic';
+  src: url('../public/fonts/Gambetta-LightItalic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-LightItalic.woff') format('woff'),
+       url('../public/fonts/Gambetta-LightItalic.ttf') format('truetype');
+       font-weight: 300;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Regular';
+  src: url('../public/fonts/Gambetta-Regular.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Regular.woff') format('woff'),
+       url('../public/fonts/Gambetta-Regular.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Italic';
+  src: url('../public/fonts/Gambetta-Italic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Italic.woff') format('woff'),
+       url('../public/fonts/Gambetta-Italic.ttf') format('truetype');
+       font-weight: 400;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Medium';
+  src: url('../public/fonts/Gambetta-Medium.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Medium.woff') format('woff'),
+       url('../public/fonts/Gambetta-Medium.ttf') format('truetype');
+       font-weight: 500;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-MediumItalic';
+  src: url('../public/fonts/Gambetta-MediumItalic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-MediumItalic.woff') format('woff'),
+       url('../public/fonts/Gambetta-MediumItalic.ttf') format('truetype');
+       font-weight: 500;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Semibold';
+  src: url('../public/fonts/Gambetta-Semibold.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Semibold.woff') format('woff'),
+       url('../public/fonts/Gambetta-Semibold.ttf') format('truetype');
+       font-weight: 600;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-SemiboldItalic';
+  src: url('../public/fonts/Gambetta-SemiboldItalic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-SemiboldItalic.woff') format('woff'),
+       url('../public/fonts/Gambetta-SemiboldItalic.ttf') format('truetype');
+       font-weight: 600;
+       font-display: swap;
+       font-style: italic;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-Bold';
+  src: url('../public/fonts/Gambetta-Bold.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-Bold.woff') format('woff'),
+       url('../public/fonts/Gambetta-Bold.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: normal;
+}
+
+
+@font-face {
+  font-family: 'Gambetta-BoldItalic';
+  src: url('../public/fonts/Gambetta-BoldItalic.woff2') format('woff2'),
+       url('../public/fonts/Gambetta-BoldItalic.woff') format('woff'),
+       url('../public/fonts/Gambetta-BoldItalic.ttf') format('truetype');
+       font-weight: 700;
+       font-display: swap;
+       font-style: italic;
+}
+
