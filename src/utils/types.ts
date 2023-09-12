@@ -17,5 +17,6 @@ export type ArtPieceInformations = {
   plaqueDescriptionEnglish: string;
   dating: {
     presentingDate: string
-  }
+  },
+  principalMaker: string,
 }

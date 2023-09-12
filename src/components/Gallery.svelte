@@ -104,7 +104,9 @@
   {#if artObjects.length > 0}
     {#each artObjects as artObject}
       <a class="art_piece" href={`/art/${artObject.objectNumber}`} use:link>
-        <p class="art_piece_title">{artObject.title}</p>
+        <p class="art_piece_title">
+          {artObject.title}
+        </p>
         <img
           class="art_piece_image"
           src={artObject.webImage.url}
@@ -140,30 +142,20 @@
     background-position: center;
     position: relative;
     border-right: 2px solid #ddd8d7;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 
   .art_piece_image {
     overflow: hidden;
-    flex-shrink: 0;
-    background-size: cover;
-    height: 100%;
+    object-fit: cover;
     width: auto;
-  }
-
-  .art_piece::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #f8f4f0;
-    opacity: 1;
-    transition: opacity 0.35s ease, color 0.2s ease;
+    height: 40vh;
+    padding: 20px;
   }
 
   .art_piece_title {
-    position: absolute;
     width: auto;
     color: #1e1e1e;
     font-size: max(42px, min(5vw, 64px));
@@ -179,6 +171,7 @@
     }
 
     .art_piece_title {
+      position: absolute;
       margin: 150px 50px;
       width: auto;
       color: #1e1e1e;
@@ -190,6 +183,26 @@
 
     .art_piece:hover .art_piece_title {
       color: white;
+    }
+
+    .art_piece::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #f8f4f0;
+      opacity: 1;
+      transition: opacity 0.35s ease, color 0.2s ease;
+    }
+
+    .art_piece_image {
+      overflow: hidden;
+      object-fit: cover;
+      width: auto;
+      height: 100%;
+      padding: 0;
     }
   }
 </style>
