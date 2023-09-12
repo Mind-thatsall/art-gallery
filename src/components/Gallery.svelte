@@ -3,21 +3,29 @@
   import { onMount } from "svelte";
   import type { ArtPiece } from "../utils/types";
   import Star from "./Star.svelte";
+  import { artObjectsStore, pageStore } from "../utils/stores";
 
   let favorite_pieces: ArtPiece[] = [];
-  let tempArtObjects: ArtPiece[] = [];
-  let artObjects: ArtPiece[] = [];
+  let artObjects: ArtPiece[];
   let pages = 0;
   let fetching: boolean = false;
   let errorOccured: boolean = false;
 
   $: fetchArt();
 
+  artObjectsStore.subscribe((data) => {
+    artObjects = data;
+  });
+
+  pageStore.subscribe((data) => {
+    pages = data;
+  });
+
   async function fetchArt() {
-    let data = [];
+    let data: any = [];
     fetching = true;
     try {
-      pages += 1;
+      pageStore.update((n) => n + 1);
       const response = await fetch(
         `https://www.rijksmuseum.nl/api/nl/collection?key=${
           import.meta.env.VITE_API_KEY
@@ -26,12 +34,15 @@
       data = await response.json();
       console.log(data);
 
-      tempArtObjects.push(...data.artObjects);
-      artObjects = tempArtObjects;
       if (!response.ok) {
         console.error("Error: ", response.statusText);
         errorOccured = true;
       }
+
+      artObjectsStore.update((arts) => {
+        arts.push(...data.artObjects);
+        return arts;
+      });
 
       fetching = false;
       return data.artObjects;
@@ -44,7 +55,7 @@
   }
 
   function addFav(e: Event, art_piece: ArtPiece) {
-    const target = e.target!;
+    const target = e.target! as HTMLInputElement;
 
     if (target.checked) {
       favorite_pieces.push(art_piece);
