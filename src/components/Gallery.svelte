@@ -7,6 +7,7 @@
   let artObjects: ArtPiece[] = [];
   let pages = 0;
   let fetching: boolean = false;
+  let errorOccured: boolean = false;
 
   async function fetchArts() {
     let data = [];
@@ -25,12 +26,14 @@
       artObjects = tempArtObjects;
       if (!response.ok) {
         console.error("Error: ", response.statusText);
+        errorOccured = true;
       }
 
       fetching = false;
       return data.artObjects;
     } catch (err) {
       console.error("Error: ", err);
+      errorOccured = true;
     }
 
     fetching = false;
@@ -74,6 +77,14 @@
       }
     });
 
+    galleryTrack.addEventListener("pointermove", async (e: PointerEvent) => {
+      e.preventDefault();
+
+      if (isNearEndOfContainer(galleryTrack) && !fetching) {
+        fetchArts();
+      }
+    });
+
     function animateScroll() {
       const distance = targetScrollLeft - galleryTrack.scrollLeft;
       const speed = 6; // Adjust the animation speed as needed
@@ -90,7 +101,7 @@
 </script>
 
 <div id="gallery">
-  {#if artObjects}
+  {#if artObjects.length > 0}
     {#each artObjects as artObject}
       <a class="art_piece" href={`/art/${artObject.objectNumber}`} use:link>
         <p class="art_piece_title">{artObject.title}</p>
@@ -102,8 +113,10 @@
         />
       </a>
     {/each}
-  {:else}
-    <p>loading...</p>
+  {:else if fetching}
+    <p class="art_piece_title">loading...</p>
+  {:else if errorOccured}
+    <p class="art_piece_title">An error occured.</p>
   {/if}
 </div>
 
