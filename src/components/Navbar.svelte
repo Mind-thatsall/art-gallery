@@ -2,22 +2,24 @@
   import { onMount } from "svelte";
   import { link } from "svelte-routing";
 
-  let isArtPiece = false;
+  let isArtPieceOrFav = false;
 
   onMount(() => {
-    isArtPiece = location.pathname.startsWith("/art/");
+    isArtPieceOrFav =
+      location.pathname.startsWith("/art/") ||
+      location.pathname.startsWith("/favorites");
   });
 </script>
 
 <nav>
   <ul>
-    <li class:go_back_visibility={!isArtPiece} class="go_back">
+    <li class:go_back_visibility={!isArtPieceOrFav} class="go_back">
       <a href="/" use:link
         ><img class="go_back_arrow" src="/arrow.svg" alt="" /></a
       >
     </li>
     <li>ART GALLERY</li>
-    <li class="favorite">S</li>
+    <li class="favorite"><a href="/favorites" use:link>S</a></li>
   </ul>
 </nav>
 

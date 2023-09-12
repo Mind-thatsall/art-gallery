@@ -2,70 +2,10 @@
   import { link } from "svelte-routing";
   import { onMount } from "svelte";
   import type { ArtPiece } from "../utils/types";
-  import Star from "./Star.svelte";
 
   let favorite_pieces: ArtPiece[] = [];
-  let tempArtObjects: ArtPiece[] = [];
-  let artObjects: ArtPiece[] = [];
-  let pages = 0;
   let fetching: boolean = false;
   let errorOccured: boolean = false;
-
-  $: fetchArt();
-
-  async function fetchArt() {
-    let data = [];
-    fetching = true;
-    try {
-      pages += 1;
-      const response = await fetch(
-        `https://www.rijksmuseum.nl/api/nl/collection?key=${
-          import.meta.env.VITE_API_KEY
-        }&p=${pages}`
-      );
-      data = await response.json();
-      console.log(data);
-
-      tempArtObjects.push(...data.artObjects);
-      artObjects = tempArtObjects;
-      if (!response.ok) {
-        console.error("Error: ", response.statusText);
-        errorOccured = true;
-      }
-
-      fetching = false;
-      return data.artObjects;
-    } catch (err) {
-      console.error("Error: ", err);
-      errorOccured = true;
-    }
-
-    fetching = false;
-  }
-
-  function addFav(e: Event, art_piece: ArtPiece) {
-    const target = e.target!;
-
-    if (target.checked) {
-      favorite_pieces.push(art_piece);
-    } else {
-      const index = favorite_pieces.findIndex(
-        (el) => el.objectNumber === art_piece.objectNumber
-      );
-      console.log(index);
-      favorite_pieces.splice(index, 1);
-    }
-    localStorage.setItem("favorite_pieces", JSON.stringify(favorite_pieces));
-  }
-
-  function isNearEndOfContainer(container: HTMLElement) {
-    const scrollThreshold = 10;
-
-    return (
-      container.scrollWidth - container.scrollLeft - container.clientWidth <=
-      scrollThreshold
-    );
-  }
 
   onMount(() => {
     const storedData = localStorage.getItem("favorite_pieces");
@@ -94,19 +34,6 @@
       if (!animationFrameID) {
         animateScroll();
       }
-
-      if (isNearEndOfContainer(galleryTrack) && !fetching) {
-        fetchArt();
-      }
-    });
-
-    // fetch more when reaching the end more mobile
-    galleryTrack.addEventListener("pointermove", async (e: PointerEvent) => {
-      e.preventDefault();
-
-      if (isNearEndOfContainer(galleryTrack) && !fetching) {
-        fetchArt();
-      }
     });
 
     function animateScroll() {
@@ -125,40 +52,24 @@
 </script>
 
 <div id="gallery">
-  {#if artObjects.length > 0}
-    {#each artObjects as artObject}
+  {#if favorite_pieces.length > 0}
+    {#each favorite_pieces as fav}
       <div class="art_piece">
-        <a href={`/art/${artObject.objectNumber}`} use:link>
+        <a href={`/art/${fav.objectNumber}`} use:link>
           <p class="art_piece_title">
-            {artObject.title}
+            {fav.title}
           </p>
           <img
             class="art_piece_image"
-            src={artObject.webImage.url}
-            alt={artObject.title}
+            src={fav.webImage.url}
+            alt={fav.title}
             draggable="false"
           />
         </a>
-        <label
-          for={`favorite_checkbox_${artObject.objectNumber}`}
-          class="art_piece_favorite"
-        >
-          <input
-            id={`favorite_checkbox_${artObject.objectNumber}`}
-            class="art_piece_favorite_check"
-            name="favorite_checkbox"
-            type="checkbox"
-            on:change={(e) => addFav(e, artObject)}
-            checked={favorite_pieces.some(
-              (el) => el.objectNumber === artObject.objectNumber
-            )}
-          />
-          <Star />
-        </label>
       </div>
     {/each}
   {:else if fetching}
-    <p class="art_piece_title">Loading...</p>
+    <p class="art_piece_title">loading...</p>
   {:else if errorOccured}
     <p class="art_piece_title">An error occured.</p>
   {/if}
@@ -207,28 +118,15 @@
     font-size: max(42px, min(5vw, 64px));
     font-weight: bold;
     line-height: 0.96;
-    margin: 10px 50px 10px 20px;
+    margin: 10px 20px;
     transition: opacity 0.35s ease, color 0.2s ease;
-    overflow-wrap: break-word;
-  }
-
-  .art_piece_favorite {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    z-index: 10;
-    cursor: pointer;
   }
 
   .art_piece_favorite_check {
     position: absolute;
-    opacity: 0;
-    pointer-events: none;
-  }
-
-  .art_piece_favorite {
-    top: 20px;
-    right: 20px;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
   }
 
   @media screen and (min-width: 768px) {
@@ -269,11 +167,6 @@
       width: auto;
       height: 100%;
       padding: 0;
-    }
-
-    .art_piece_favorite {
-      bottom: 20px;
-      right: 20px;
     }
   }
 </style>
