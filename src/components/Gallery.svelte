@@ -63,7 +63,6 @@
       const index = favorite_pieces.findIndex(
         (el) => el.objectNumber === art_piece.objectNumber
       );
-      console.log(index);
       favorite_pieces.splice(index, 1);
     }
     localStorage.setItem("favorite_pieces", JSON.stringify(favorite_pieces));
@@ -225,7 +224,7 @@
 
   .art_piece_favorite {
     position: absolute;
-    bottom: 20px;
+    top: 20px;
     right: 20px;
     z-index: 10;
     cursor: pointer;
@@ -235,11 +234,6 @@
     position: absolute;
     opacity: 0;
     pointer-events: none;
-  }
-
-  .art_piece_favorite {
-    top: 20px;
-    right: 20px;
   }
 
   @media screen and (min-width: 768px) {
