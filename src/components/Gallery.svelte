@@ -11,8 +11,6 @@
   let fetching: boolean = false;
   let errorOccured: boolean = false;
 
-  $: fetchArt();
-
   artObjectsStore.subscribe((data) => {
     artObjects = data;
   });
@@ -78,6 +76,8 @@
   }
 
   onMount(() => {
+    fetchArt();
+
     const storedData = localStorage.getItem("favorite_pieces");
     if (storedData) {
       favorite_pieces = JSON.parse(storedData);
